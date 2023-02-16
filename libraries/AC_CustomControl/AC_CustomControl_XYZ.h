@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AC_CustomControl_Backend.h"
+#include <AC_Simulink/arduAttCont.h>
 
 #ifndef CUSTOMCONTROL_XYZ_ENABLED
     #define CUSTOMCONTROL_XYZ_ENABLED AP_CUSTOMCONTROL_ENABLED
@@ -15,6 +16,8 @@ public:
 
     Vector3f update(void) override;
     void reset(void) override;
+
+    arduAttContModelClass simulink_controller;
 
     // user settable parameters
     static const struct AP_Param::GroupInfo var_info[];
