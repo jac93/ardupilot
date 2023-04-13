@@ -82,6 +82,7 @@ Vector3f AC_CustomControl_LQR::update(void)
     float rate_meas[3]{ gyro_latest.x, gyro_latest.y, gyro_latest.z }; 
 
     rate_des[0] = lqi_controller.kp_roll_*attitude_error.x;
+    rate_des[1] = 0.0; //test with 0 desired yaw rate
 
     lqi_controller.step(rate_des,rate_meas,arg_Out1,_dt.dt);
 
