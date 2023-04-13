@@ -33,7 +33,7 @@ AC_CustomControl_LQR::AC_CustomControl_LQR(AC_CustomControl& frontend, AP_AHRS_V
 {
     AP_Param::setup_object_defaults(this, var_info);
 
-    simulink_controller.initialize();
+    lqi_controller.initialize();
 }
 
 // update controller
@@ -75,21 +75,18 @@ Vector3f AC_CustomControl_LQR::update(void)
     // run rate controller
     Vector3f gyro_latest = _ahrs->get_gyro_latest();
 
-     float arg_attiude_error[3]{ attitude_error.x, attitude_error.y, attitude_error.z };
-
-// '<Root>/rate_ff'
-    float arg_rate_ff[3]{ ang_vel_body_feedforward.x, ang_vel_body_feedforward.y, ang_vel_body_feedforward.z };
-
-// '<Root>/rate_meas'
-    float arg_rate_meas[3]{ gyro_latest.x, gyro_latest.y, gyro_latest.z };
-
 // '<Root>/Out1'
-    float  arg_Out1[3];
+    float  arg_Out1[2];
 
-    simulink_controller.step(arg_attiude_error, arg_rate_ff, arg_rate_meas, arg_Out1);
+    float rate_des[3] = {0,0,0};
+    float rate_meas[3]{ gyro_latest.x, gyro_latest.y, gyro_latest.z }; 
+
+    rate_des[0] = lqi_controller.kp_roll_*attitude_error.x;
+
+    lqi_controller.step(rate_des,rate_meas,arg_Out1,_dt.dt);
 
     // return what arducopter main controller outputted
-    return Vector3f(arg_Out1[0], arg_Out1[1], arg_Out1[2]);
+    return Vector3f(arg_Out1[0], _motors->get_pitch(), arg_Out1[1]);
 }
 
 // reset controller to avoid build up on the ground

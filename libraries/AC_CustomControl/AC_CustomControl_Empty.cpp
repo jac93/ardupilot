@@ -54,6 +54,7 @@ Vector3f AC_CustomControl_Empty::update(void)
             break;
     }
 
+
     // arducopter main attitude controller already runned
     // we don't need to do anything else
 

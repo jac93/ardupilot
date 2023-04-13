@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AC_CustomControl_Backend.h"
-#include <AC_Simulink/arduAttCont.h>
+#include <AC_LQI/LqiAttRY.h>
 
 #ifndef CUSTOMCONTROL_LQR_ENABLED
     #define CUSTOMCONTROL_LQR_ENABLED AP_CUSTOMCONTROL_ENABLED
@@ -17,7 +17,7 @@ public:
     Vector3f update(void) override;
     void reset(void) override;
 
-    arduAttContModelClass simulink_controller;
+    LQRcontrolRY lqi_controller;
 
     // user settable parameters
     static const struct AP_Param::GroupInfo var_info[];
