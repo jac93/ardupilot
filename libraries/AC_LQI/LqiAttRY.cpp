@@ -30,21 +30,21 @@ void LQRcontrolRY::matrix_multiply(float A[2][4], float x[4], float u[2])
 
 }
 
-void LQRcontrolRY::set_Klqi(Kgains gains)
-{
-    Klqi[0][0] = gains.kxp;
-    Klqi[0][1] = gains.kxr;
-    Klqi[0][2] = gains.kxp_int;
-    Klqi[0][3] = gains.kxr_int;
+// void LQRcontrolRY::set_Klqi(Kgains gains)
+// {
+//     Klqi[0][0] = gains.kxp;
+//     Klqi[0][1] = gains.kxr;
+//     Klqi[0][2] = gains.kxp_int;
+//     Klqi[0][3] = gains.kxr_int;
 
-    Klqi[1][0] = gains.kzp;
-    Klqi[1][1] = gains.kzr;
-    Klqi[1][2] = gains.kzp_int;
-    Klqi[1][3] = gains.kzr_int;
+//     Klqi[1][0] = gains.kzp;
+//     Klqi[1][1] = gains.kzr;
+//     Klqi[1][2] = gains.kzp_int;
+//     Klqi[1][3] = gains.kzr_int;
 
 
 
-}
+// }
 
 void LQRcontrolRY::initialize(void)
 {
@@ -53,18 +53,18 @@ void LQRcontrolRY::initialize(void)
 
 }
 
-void LQRcontrolRY::set_Kgains_default(Kgains gains)
-{
-    gains.kxp = 0.4539;
-    gains.kxr = -0.0587;
-    gains.kxp_int = 0.3794;
-    gains.kxr_int = -0.0668;
+// void LQRcontrolRY::set_Kgains_default(Kgains gains)
+// {
+//     gains.kxp = 0.4539;
+//     gains.kxr = -0.0587;
+//     gains.kxp_int = 0.3794;
+//     gains.kxr_int = -0.0668;
     
-    gains.kzp = 0.1143;
-    gains.kzr = 1.3073;
-    gains.kzp_int = 0.0445;
-    gains.kzr_int = 0.5691;
-}
+//     gains.kzp = 0.1143;
+//     gains.kzr = 1.3073;
+//     gains.kzp_int = 0.0445;
+//     gains.kzr_int = 0.5691;
+// }
 
 void LQRcontrolRY::update_integral_err(float (&error)[4],float dt)
 {
